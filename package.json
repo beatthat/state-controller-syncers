@@ -1,0 +1,35 @@
+{
+  "name": "unity-state-controller-syncers",
+  "version": "0.0.1",
+  "description": "Property components that enable get, set, and observe for (Animator) StateController properties",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beatthat/unity-state-controller-syncers.git"
+  },
+  "files": [
+    "index.js",
+    "scripts",
+    "src"
+  ],
+  "author": "larrykirschner@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beatthat/unity-state-controller-syncers/issues"
+  },
+  "homepage": "https://github.com/beatthat/unity-state-controller-syncers",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "unity-bindings": "github:beatthat/unity-bindings#semver:^0.0.3",
+    "unity-binding-behaviours": "github:beatthat/unity-binding-behaviours#semver:^0.0.9",
+    "unity-state-controllers": "beatthat/unity-state-controllers#semver:^0.0.1",
+    "unity-properties": "beatthat/unity-properties#semver:^0.0.6",
+    "unity-extensions": "beatthat/unity-extensions#semver:^0.0.2",
+    "unity-utils": "beatthat/unity-utils#semver:^0.0.5"
+  }
+}

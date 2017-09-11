@@ -5,7 +5,7 @@ using BeatThat;
 namespace BeatThat
 {
 	/// <summary>
-	/// Binds a StateController to another state controller so that any param set in the parent is synched locally.
+	/// Add as a sibling to a StateController that has a StateController parent and any param changed in the child StateController will be synced to the parent.
 	/// </summary>
 	public class SyncStateToParent : BindingBehaviour
 	{

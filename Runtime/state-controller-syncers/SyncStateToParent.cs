@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+using BeatThat.SafeRefs;
+using BeatThat.TransformPathExt;
+using BeatThat.Controllers;
+using BeatThat.Properties;
+using UnityEngine;
 using UnityEngine.Events;
 using BeatThat;
+using BeatThat.Bindings;
 
-namespace BeatThat
+namespace BeatThat.StateControllers
 {
 	/// <summary>
 	/// Add as a sibling to a StateController that has a StateController parent and any param changed in the child StateController will be synced to the parent.
@@ -40,6 +45,13 @@ namespace BeatThat
 
 		private void SyncParam(StateParamUpdate p)
 		{
+			if (this.syncTo == null) {
+				#if UNITY_EDITOR || DEBUG_UNSTRIP
+				Debug.LogWarning("[" + Time.frameCount + "] SyncStateToParent on " + this.Path() + " has no parent to sync to");
+				#endif
+				return;
+			}
+
 			if(!ShouldSyncParam(p)) {
 				#if BT_DEBUG_UNSTRIP || UNITY_EDITOR
 				if(m_debug) {
@@ -162,3 +174,6 @@ namespace BeatThat
 		private StateController m_state;
 	}
 }
+
+
+

@@ -1,15 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using BeatThat;
-using System.Collections.Generic;
+using BeatThat.SafeRefs;
+using BeatThat.TransformPathExt;
+using BeatThat.Pools;
+using BeatThat.Controllers;
 using System.Collections;
+using System.Collections.Generic;
+using BeatThat.Bindings;
+using BeatThat.Properties;
+using UnityEngine;
+using UnityEngine.Events;
 
-namespace BeatThat
+namespace BeatThat.StateControllers
 {
-	/// <summary>
-	/// Binds a StateController to another state controller so that any param set in the parent is synched locally.
-	/// </summary>
-	public class SyncStateFromParent : BindingBehaviour
+    /// <summary>
+    /// Binds a StateController to another state controller so that any param set in the parent is synched locally.
+    /// </summary>
+    public class SyncStateFromParent : BindingBehaviour
 	{
 		public bool m_debug;
 
@@ -178,6 +183,13 @@ namespace BeatThat
 
 		private void SyncNonLocal()
 		{
+			if (this.syncFrom == null) {
+				#if UNITY_EDITOR || DEBUG_UNSTRIP
+				Debug.LogWarning("[" + Time.frameCount + "] SyncStateFromParent on " + this.Path() + " has no parent to sync from");
+				#endif
+				return;
+			}
+
 			if(!this.state.isReady || !this.syncFrom.isReady) {
 				StopAllCoroutines();
 				StartCoroutine(SyncWhenReady());
@@ -273,3 +285,7 @@ namespace BeatThat
 		private StateController m_state;
 	}
 }
+
+
+
+
